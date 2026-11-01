@@ -84,7 +84,7 @@ Express agent and MCP rules as versioned, testable policy instead of per-develop
 # Illustrative OPA rule: block unpinned MCP servers in committed config
 package agent.mcp
 
-deny[msg] {
+deny contains msg if {
   some name
   server := input.mcpServers[name]
   contains(server.args[_], "@latest")
